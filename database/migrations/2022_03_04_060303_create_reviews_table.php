@@ -21,9 +21,9 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
-            $table->integer('rating');
-            $table->text('comment');
-            $table->bigInteger('order_item_id')->unsigned();
+            $table->integer('rating'); # 별점
+            $table->text('comment'); # 코멘트
+            $table->bigInteger('order_item_id')->unsigned(); # 주문한 상품 ID
 
             $table->foreign('order_item_id')
                 ->references('id')

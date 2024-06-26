@@ -22,10 +22,10 @@ return new class extends Migration
 
             $table->string('enable')->default("false");
 
-            $table->string('name');
-            $table->string('number')->nullable();
-            $table->string('security_manager')->nullable();
-            $table->string('domain')->nullable();
+            $table->string('name'); # shop 이름
+            $table->string('number')->nullable(); # shop 번호
+            $table->string('security_manager')->nullable(); # shop 시큐리티 매니저
+            $table->string('domain')->nullable(); # 도메인
 
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
