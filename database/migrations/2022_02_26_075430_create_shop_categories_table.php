@@ -4,6 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * shop 내 카테고리 Table
+ */
 return new class extends Migration
 {
     /**
@@ -20,7 +23,10 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
+            # 카테고리 이름
             $table->string('name')->unique();
+
+            # 특정 리소스나 페이지를 식별하는 데 사용되는 URL 친화적인 문자열
             $table->string('slug')->unique();
         });
     }
