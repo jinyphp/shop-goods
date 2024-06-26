@@ -1,6 +1,6 @@
 <?php
 
-namespace Jiny\Shop\Http\Controllers\Admin;
+namespace Jiny\Shop\Goods\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,8 +24,8 @@ class AdminProductController extends WireTablePopupForms
 
         //$this->actions['view_title'] = "jiny-shop::admin.category.title";
         //$this->actions['view_filter'] = "jiny-shop::admin.category.filter";
-        $this->actions['view_list'] = "jiny-shop::admin.products.list";
-        $this->actions['view_form'] = "jiny-shop::admin.products.form";
+        $this->actions['view']['list'] = "jiny-shop-goods::admin.products.list";
+        $this->actions['view']['form'] = "jiny-shop-goods::admin.products.form";
 
     }
 

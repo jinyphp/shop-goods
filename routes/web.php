@@ -56,9 +56,6 @@ Route::middleware(['web'])
  * 관리자
  */
 Route::middleware(['auth:sanctum','verified'])->group(function(){
-    Route::get('/shop/admin/products', [
-        \Jiny\Shop\Http\Controllers\Admin\AdminProductController::class,
-        'index']);
 
     Route::resource('/shop/admin/reviews',
         \Jiny\Shop\Http\Controllers\Admin\AdminReviewController::class);
@@ -71,5 +68,13 @@ Route::middleware(['auth:sanctum','verified'])->group(function(){
 
     Route::resource('/shop/admin/seller',
         \Jiny\Shop\Http\Controllers\Admin\AdminSellerController::class);
+
+});
+
+## 인증 없이 접속가능한 경로 처리
+Route::middleware(['web'])->group(function(){
+    Route::get('/admin/shop/products', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminProductController::class,
+        'index']);
 
 });
