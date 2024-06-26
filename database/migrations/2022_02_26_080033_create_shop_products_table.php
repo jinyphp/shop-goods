@@ -69,7 +69,7 @@ return new class extends Migration
             $table->string('buy')->nullable();  // 되팔기 허용
 
 
-            # 재고 관리 단위
+            # 재고 관리를 위한 고유 식별자
             $table->string('SKU')->nullable();
 
             # 상품의 재고 여부(instock -> 재고 있음, soldout -> 다팔림)
