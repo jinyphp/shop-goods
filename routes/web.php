@@ -95,4 +95,8 @@ Route::middleware(['web'])->group(function(){
         \Jiny\Shop\Goods\Http\Controllers\Admin\AdminBrandController::class,
         'index']);
 
+    Route::get('/admin/shop/productCategories', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminProductCategoryController::class,
+        'index']);
+
 });

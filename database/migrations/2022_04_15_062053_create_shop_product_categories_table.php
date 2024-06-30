@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+
+/**
+ * shop의 상품의 카테고리 테이블
+ */
 return new class extends Migration
 {
     /**
