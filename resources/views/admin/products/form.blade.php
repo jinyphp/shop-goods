@@ -39,10 +39,10 @@
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>sort_description</x-form-label>
+                <x-form-label>short_description</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.sort_description")
+                        ->setWire('model.defer',"forms.short_description")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
