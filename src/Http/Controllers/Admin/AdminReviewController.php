@@ -1,6 +1,6 @@
 <?php
 
-namespace Jiny\Shop\Http\Controllers\Admin;
+namespace Jiny\Shop\Goods\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -20,13 +20,10 @@ class AdminReviewController extends WireTablePopupForms
         $this->setVisit($this);
 
         ##
-        $this->actions['table'] = "shop_product_reviews"; // 테이블 정보
+        $this->actions['table'] = "reviews"; // 테이블 정보
 
-        $this->actions['view_list'] = "jiny-shop::admin.reviews.list";
-        $this->actions['view_form'] = "jiny-shop::admin.reviews.form";
+        $this->actions['view']['list'] = "jiny-shop-goods::admin.reviews.list";
+        $this->actions['view']['form'] = "jiny-shop-goods::admin.reviews.form";
 
     }
-
-
-
 }

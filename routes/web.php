@@ -88,5 +88,8 @@ Route::middleware(['web'])->group(function(){
     Route::get('/admin/shop/information', [
         \Jiny\Shop\Goods\Http\Controllers\Admin\AdminInformationController::class,
         'index']);
+    Route::get('/admin/shop/reviews', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminReviewController::class,
+        'index']);
 
 });
