@@ -77,4 +77,8 @@ Route::middleware(['web'])->group(function(){
         \Jiny\Shop\Goods\Http\Controllers\Admin\AdminProductController::class,
         'index']);
 
+    Route::get('/admin/shop/category', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminCategoryController::class,
+        'index']);
+
 });
