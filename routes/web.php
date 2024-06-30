@@ -81,4 +81,8 @@ Route::middleware(['web'])->group(function(){
         \Jiny\Shop\Goods\Http\Controllers\Admin\AdminCategoryController::class,
         'index']);
 
+    Route::get('/admin/shop/onsale', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminOnsaleController::class,
+        'index']);
+
 });
