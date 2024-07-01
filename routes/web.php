@@ -110,4 +110,7 @@ Route::middleware(['web'])->group(function(){
     Route::get('/admin/shop/optionItem', [
         \Jiny\Shop\Goods\Http\Controllers\Admin\AdminOptionItemController::class,
         'index']);
+    Route::get('/admin/shop/productOption', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminProductOptionController::class,
+        'index']);
 });
