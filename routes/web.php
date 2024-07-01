@@ -104,5 +104,7 @@ Route::middleware(['web'])->group(function(){
     Route::get('/admin/shop/options', [
         \Jiny\Shop\Goods\Http\Controllers\Admin\AdminOptionController::class,
         'index']);
-
+    Route::get('/admin/shop/reviewLikes', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminReviewLikeController::class,
+        'index']);
 });
