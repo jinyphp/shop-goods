@@ -19,7 +19,17 @@
             --}}
 
             <x-form-hor>
-                <x-form-label>이름</x-form-label>
+                <x-form-label>enable</x-form-label>
+                <x-form-item>
+                    {!! xInputText()
+                        ->setWire('model.defer',"forms.enable")
+                        ->setWidth("standard")
+                    !!}
+                </x-form-item>
+            </x-form-hor>
+
+            <x-form-hor>
+                <x-form-label>name</x-form-label>
                 <x-form-item>
                     {!! xInputText()
                         ->setWire('model.defer',"forms.name")
@@ -29,157 +39,134 @@
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>slug</x-form-label>
+                <x-form-label>number</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.slug")
+                        ->setWire('model.defer',"forms.number")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>short_description</x-form-label>
+                <x-form-label>security_manager</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.short_description")
+                        ->setWire('model.defer',"forms.security_manager")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>description</x-form-label>
+                <x-form-label>domain</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.description")
+                        ->setWire('model.defer',"forms.domain")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>regular_price</x-form-label>
+                <x-form-label>email</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.regular_price")
+                        ->setWire('model.defer',"forms.email")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>sale_price</x-form-label>
+                <x-form-label>phone</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.sale_price")
+                        ->setWire('model.defer',"forms.phone")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>SKU</x-form-label>
+                <x-form-label>phone2</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.SKU")
+                        ->setWire('model.defer',"forms.phone2")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>stock_status</x-form-label>
+                <x-form-label>address</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.stock_status")
-                        ->setWidth("standard")
-                    !!}
-                    'instock','soldout'
-                </x-form-item>
-            </x-form-hor>
-
-            <x-form-hor>
-                <x-form-label>featured'</x-form-label>
-                <x-form-item>
-                    {!! xInputText()
-                        ->setWire('model.defer',"forms.featured")
+                        ->setWire('model.defer',"forms.address")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>quantity</x-form-label>
+                <x-form-label>map</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.quantity")
+                        ->setWire('model.defer',"forms.map")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>image</x-form-label>
+                <x-form-label>twiter</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.image")
+                        ->setWire('model.defer',"forms.twiter")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>category_id</x-form-label>
+                <x-form-label>facebook</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.category_id")
+                        ->setWire('model.defer',"forms.facebook")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>option</x-form-label>
+                <x-form-label>pinterest</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.option")
+                        ->setWire('model.defer',"forms.pinterest")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>shipping_free</x-form-label>
+                <x-form-label>instagram</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.shipping_free")
+                        ->setWire('model.defer',"forms.instagram")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
 
             <x-form-hor>
-                <x-form-label>author</x-form-label>
+                <x-form-label>youtube</x-form-label>
                 <x-form-item>
                     {!! xInputText()
-                        ->setWire('model.defer',"forms.author")
+                        ->setWire('model.defer',"forms.youtube")
                         ->setWidth("standard")
                     !!}
                 </x-form-item>
             </x-form-hor>
-
-            <x-form-hor>
-                <x-form-label>translator</x-form-label>
-                <x-form-item>
-                    {!! xInputText()
-                        ->setWire('model.defer',"forms.translator")
-                        ->setWidth("standard")
-                    !!}
-                </x-form-item>
-            </x-form-hor>
-
-
 
 
         </x-navtab-item>

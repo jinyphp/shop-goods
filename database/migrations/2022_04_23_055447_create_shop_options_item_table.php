@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * shop item들에 대한 option Table
+ */
 return new class extends Migration
 {
     /**
@@ -20,18 +23,23 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
+            // 옵션id
             $table->unsignedBigInteger('option_id')->nullable();
 
+            // 옵션 활성화 여부
             $table->string('enable')->default(1);
             $table->string('name'); // 옵션이름
 
+            // 옵션 value
             $table->string('value')->nullable();
 
+            // 아이탬 재고
             $table->string('stock')->nullable();
-            $table->string('price')->nullable(); // 지정가격, + , -
 
+            // 지정가격, + , -
+            $table->string('price')->nullable();
 
-
+            // nested
             $table->unsignedBigInteger('nested')->default(0);
 
             // 옵션 설명

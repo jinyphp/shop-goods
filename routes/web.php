@@ -77,4 +77,43 @@ Route::middleware(['web'])->group(function(){
         \Jiny\Shop\Goods\Http\Controllers\Admin\AdminProductController::class,
         'index']);
 
+    Route::get('/admin/shop/category', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminCategoryController::class,
+        'index']);
+
+    Route::get('/admin/shop/onsale', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminOnsaleController::class,
+        'index']);
+
+    Route::get('/admin/shop/information', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminInformationController::class,
+        'index']);
+    Route::get('/admin/shop/reviews', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminReviewController::class,
+        'index']);
+    Route::get('/admin/shop/brands', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminBrandController::class,
+        'index']);
+
+    Route::get('/admin/shop/productCategories', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminProductCategoryController::class,
+        'index']);
+    Route::get('/admin/shop/productImages', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminProductImageController::class,
+        'index']);
+    Route::get('/admin/shop/options', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminOptionController::class,
+        'index']);
+    Route::get('/admin/shop/reviewLikes', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminReviewLikeController::class,
+        'index']);
+    Route::get('/admin/shop/optionItem', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminOptionItemController::class,
+        'index']);
+    Route::get('/admin/shop/productOption', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminProductOptionController::class,
+        'index']);
+    Route::get('/admin/shop/homeCategory', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminHomeCategoryController::class,
+        'index']);
 });

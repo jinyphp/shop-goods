@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * shop 내 홈페이지의 카테고리 Table
+ */
 return new class extends Migration
 {
     /**
@@ -20,7 +23,10 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
+            // 홈페이지의 탭의 카테고리
             $table->string('sel_categories');
+
+            // 카테고리 내의 상품 개숫
             $table->integer('no_of_products');
 
         });

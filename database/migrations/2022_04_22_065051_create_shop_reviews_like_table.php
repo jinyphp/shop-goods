@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * shop 리뷰의 좋아요 Table
+ */
 return new class extends Migration
 {
     /**
@@ -20,11 +23,16 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
-            // 리뷰
+            // 리뷰 id
             $table->unsignedBigInteger('review_id')->nullable();
 
+            // user id
             $table->unsignedBigInteger('user_id')->nullable();
+
+            // user 이름
             $table->string('username')->nullable();
+
+            // user 이메일
             $table->string('email')->nullable();
 
 
