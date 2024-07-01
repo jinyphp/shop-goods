@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * shop의 상품의 이미지 관련 테이블
+ */
 return new class extends Migration
 {
     /**
@@ -20,8 +23,13 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
-            $table->bigInteger('product_id'); // 제품 번호
+            // 제품 번호
+            $table->bigInteger('product_id');
+
+            // image 타입
             $table->string('type')->default('image');
+
+            // image url
             $table->string('image')->nullable();
 
 

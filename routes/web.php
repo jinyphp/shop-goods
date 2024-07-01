@@ -98,5 +98,8 @@ Route::middleware(['web'])->group(function(){
     Route::get('/admin/shop/productCategories', [
         \Jiny\Shop\Goods\Http\Controllers\Admin\AdminProductCategoryController::class,
         'index']);
+    Route::get('/admin/shop/productImages', [
+        \Jiny\Shop\Goods\Http\Controllers\Admin\AdminProductImageController::class,
+        'index']);
 
 });
