@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * shop 상품의 옵션 Table
+ */
 return new class extends Migration
 {
     /**
@@ -20,6 +23,7 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
+            // 옵션활성화 여부
             $table->string('enable')->default(1);
 
             $table->unsignedBigInteger('product_id'); // 상품명
