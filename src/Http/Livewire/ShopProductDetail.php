@@ -25,7 +25,7 @@ class ShopProductDetail extends Component
     public $actions = [];
     public $widget=[]; // 위젯정보
 
-    public $product = []; //상품정보
+    // public $product = []; //상품정보
     public $slug;
     public $qty;
 
@@ -55,7 +55,7 @@ class ShopProductDetail extends Component
         $this->setup = true;
     }
 
-
+    // 라이브와이어 생성자
     public function mount()
     {
         $this->qty = 1;
@@ -65,6 +65,7 @@ class ShopProductDetail extends Component
 
     public function render()
     {
+
         $slug = $this->slug;
         if (is_numeric($slug)) {
             $product = DB::table('shop_products')
@@ -76,32 +77,34 @@ class ShopProductDetail extends Component
                 ->where('slug',$slug)->first();
         }
 
-        //dd($product);
+        // dump($product);
 
         // 객체를 배열로 변환
         foreach($product as $key => $value) {
             $this->forms[$key] = $value;
         }
 
-        //dd($this->forms);
+        // dd($this->forms);
 
 
-        // 옵션설정
-        if($product->option) {
-            $options = $this->options($product->id);
-        } else {
-            $options = null;
-        }
+        // // 옵션설정
+        // if($product->option) {
+        //     $options = $this->options($product->id);
+        // } else {
+        //     $options = null;
+        // }
 
-        // 배송정보
-        $shipping = DB::table('shop_shipping_method')->where('enable',1)->get();
+        // // 배송정보
+        // $shipping = DB::table('shop_shipping_method')->where('enable',1)->get();
 
         $viewFile = 'jiny-shop-goods::detail.widget';
         return view($viewFile, [
+            // 'slug'=>$this->slug
+
             'product'=>$product,
-            'shipping'=>$shipping,
-            'options'=>$options,
-            'optiontree' => $this->optionTree($options,"option")->addClass("option")
+            // 'shipping'=>$shipping,
+            // 'options'=>$options,
+            // 'optiontree' => $this->optionTree($options,"option")->addClass("option")
         ]);
     }
 
@@ -337,6 +340,7 @@ class ShopProductDetail extends Component
 
     public function decreaseQuantity()
     {
+        // 수량 하한선
         if($this->qty>1) {
             $this->qty--;
         }

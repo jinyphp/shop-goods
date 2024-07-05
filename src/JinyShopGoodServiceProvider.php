@@ -33,6 +33,11 @@ class JinyShopGoodServiceProvider extends ServiceProvider
     {
         /* 라이브와이어 컴포넌트 등록 */
         $this->app->afterResolving(BladeCompiler::class, function () {
+
+            //test용
+            Livewire::component('ShopProductSlider',
+            \Jiny\Shop\Goods\Http\Livewire\Slider::class);
+
             Livewire::component('shop-product-list',
                 \Jiny\Shop\Goods\Http\Livewire\ShopProductList::class);
 
