@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    {{$infomation}}
+    {{$information}}
 
     @if($admin)
     <x-wire-dialog-modal maxWidth="7xl" wire:model="popup">
@@ -25,7 +25,7 @@
             <div class="mt-2">
                 <textarea name="trans" id="" cols="30" rows="10"
                 class="w-full px-3 py-2 border rounded-lg shadow-sm border-gray300 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                wire:model.defer="infomation">
+                wire:model.defer="information">
                 </textarea>
 
             </div>

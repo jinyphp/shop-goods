@@ -50,8 +50,8 @@ class JinyShopGoodServiceProvider extends ServiceProvider
             Livewire::component('ShopProductDescription',
                 \Jiny\Shop\Goods\Http\Livewire\ShopProductDescription::class);
 
-            Livewire::component('ShopProductInfomation',
-                \Jiny\Shop\Goods\Http\Livewire\ShopProductInfomation::class);
+            Livewire::component('ShopProductInformation',
+                \Jiny\Shop\Goods\Http\Livewire\ShopProductInformation::class);
 
             Livewire::component('shop-brand',
                 \Jiny\Shop\Goods\Http\Livewire\ShopBrands::class);
