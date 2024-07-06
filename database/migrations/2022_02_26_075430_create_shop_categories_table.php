@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('name');
 
             # 특정 리소스나 페이지를 식별하는 데 사용되는 URL 친화적인 문자열
-            $table->string('slug')->unique();
+            $table->string('slug');
         });
     }
 

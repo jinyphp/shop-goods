@@ -16,8 +16,8 @@
             {{-- 테이블 리스트 --}}
             <x-wire-tbody-item :selected="$selected" :item="$item">
 
-                <td width='100'>{{$item->slug}}</td>
                 <td width='100'>{{$item->name}}</td>
+                <td width='100'>{{$item->slug}}</td>
 
             </x-wire-tbody-item>
             @endforeach

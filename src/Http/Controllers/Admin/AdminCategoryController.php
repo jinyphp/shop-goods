@@ -29,13 +29,13 @@ class AdminCategoryController extends WireTablePopupForms
 
     }
 
-    // Hook
-    // 신규 데이터 DB 삽입전에 호출됩니다.
-    public function hookStoring($wire,$form)
-    {
-        $form['slug'] = Str::slug($form['name']);
-        return $form;
-    }
+    // // Hook
+    // // 신규 데이터 DB 삽입전에 호출됩니다.
+    // public function hookStoring($wire,$form)
+    // {
+    //     $form['slug'] = Str::slug($form['name']);
+    //     return $form;
+    // }
 
     public function hookStored($wire, $form)
     {
@@ -43,12 +43,12 @@ class AdminCategoryController extends WireTablePopupForms
         session()->flash('message',"카테고리가 성공적으로 추가 되어 있습니다.");
     }
 
-    // 수정된 데이터가 DB에 적용되기 전
-    public function hookUpdating($form)
-    {
-        $form['slug'] = Str::slug($form['name']);
-        return $form;
-    }
+    // // 수정된 데이터가 DB에 적용되기 전
+    // public function hookUpdating($form)
+    // {
+    //     $form['slug'] = Str::slug($form['name']);
+    //     return $form;
+    // }
 
 
 }
