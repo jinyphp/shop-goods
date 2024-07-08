@@ -1,20 +1,38 @@
 <div>
-    <div class="tabs">
-        <button wire:click="setTab('details')">상세 정보</button>
-        <button wire:click="setTab('reviews')">후기</button>
-        <button wire:click="setTab('styles')">사이즈</button>
-    </div>
+
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link {{ $currentTab === 'details' ? 'active' : '' }}"
+             aria-current="page"
+             href="#"
+             wire:click.prevent="setTab('details')">상세 정보</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ $currentTab === 'reviews' ? 'active' : '' }}"
+             href="#"
+             wire:click.prevent="setTab('reviews')">후기</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ $currentTab === 'styles' ? 'active' : '' }}"
+             href="#"
+             wire:click.prevent="setTab('styles')">사이즈</a>
+        </li>
+    </ul>
 
     <div class="tab-content">
         @if ($currentTab === 'details')
             {{-- 상품 상세 정보 --}}
-            1
+            @livewire("ShopProductDescription", ['product'=>$product])
         @elseif ($currentTab === 'reviews')
             {{-- 상품 후기 --}}
-            2
+            {{-- @livewire('ShopProductReview') --}}
+            추후 Review List blade 작성
         @elseif ($currentTab === 'styles')
             {{-- 상품 사이즈 --}}
-            3
+            {{-- @livewire('ShopProductSize') --}}
+            S <br>
+            L <br>
+            XL<br>
         @endif
     </div>
 </div>
