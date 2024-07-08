@@ -17,6 +17,7 @@ class ShopProductInformation extends Component
 {
     public $product;
     public $information;
+    public $currentTab = 'details';
 
     public function render()
     {
@@ -78,6 +79,10 @@ class ShopProductInformation extends Component
         //DB::table('shop_products')->where('id', $this->_id)->update($this->forms);
         $this->_id = null;
         $this->popup = false;
+    }
+
+    public function setTab($param) {
+        $this->currentTab = $param;
     }
 
 }

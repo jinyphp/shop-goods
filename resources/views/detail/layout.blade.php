@@ -17,8 +17,9 @@
         ])
     </div>
 
-    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="d-flex justify-content-center" style="height: 100vh;">
         <!-- 상품 상세정보 -->
+
         @livewire('ShopProductInformation', [
             'product'=>$product
         ])
