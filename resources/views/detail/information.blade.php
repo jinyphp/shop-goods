@@ -25,8 +25,7 @@
             @livewire("ShopProductDescription", ['product'=>$product])
         @elseif ($currentTab === 'reviews')
             {{-- 상품 후기 --}}
-            {{-- @livewire('ShopProductReview') --}}
-            추후 Review List blade 작성
+            @livewire('ShopProductReview')
         @elseif ($currentTab === 'styles')
             {{-- 상품 사이즈 --}}
             {{-- @livewire('ShopProductSize') --}}
