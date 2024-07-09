@@ -13,10 +13,11 @@ use \Jiny\Html\CTag;
 use Jiny\Shop\Entities\ShopProducts;
 use Cart;
 
-class ShopProductInfomation extends Component
+class ShopProductInformation extends Component
 {
     public $product;
-    public $infomation;
+    public $information;
+    public $currentTab = 'details';
 
     public function render()
     {
@@ -25,16 +26,19 @@ class ShopProductInfomation extends Component
         // 상품 상세 페이지
         $datePath = str_replace("-","/", explode(" ",$product['created_at'])[0]);
         $path = resource_path('views/shop/details/'.$datePath);
+
+        // dump($datePath);
+        // dd($path);
         if(!is_dir($path.'/'.$product['id'])) mkdir($path.'/'.$product['id'], 0755, true);
-        if(!file_exists($path.'/'.$product['id']."/infomation.blade.php")) {
-            $infomation = "상품 상세 정보가 없습니다.";
-            file_put_contents($path.'/'.$product['id']."/infomation.blade.php", $infomation);
+        if(!file_exists($path.'/'.$product['id']."/information.blade.php")) {
+            $information = "상품 상세 정보가 없습니다.";
+            file_put_contents($path.'/'.$product['id']."/information.blade.php", $information);
         } else {
-            $infomation = file_get_contents($path.'/'.$product['id']."/infomation.blade.php");
+            $information = file_get_contents($path.'/'.$product['id']."/information.blade.php");
         }
 
-        $this->infomation = $infomation;
-        return view('jiny-shop-goods::detail.infomation');
+        $this->information = $information;
+        return view('jiny-shop-goods::detail.information');
     }
 
     /**
@@ -67,14 +71,18 @@ class ShopProductInfomation extends Component
         $datePath = str_replace("-","/", explode(" ",$product['created_at'])[0]);
         $path = resource_path('views/shop/details/'.$datePath);
         if(!is_dir($path.'/'.$product['id'])) mkdir($path.'/'.$product['id'], 0755, true);
-        if(file_exists($path.'/'.$product['id']."/infomation.blade.php")) {
+        if(file_exists($path.'/'.$product['id']."/information.blade.php")) {
 
-            file_put_contents($path.'/'.$product['id']."/infomation.blade.php", $this->infomation);
+            file_put_contents($path.'/'.$product['id']."/information.blade.php", $this->information);
         }
 
         //DB::table('shop_products')->where('id', $this->_id)->update($this->forms);
         $this->_id = null;
         $this->popup = false;
+    }
+
+    public function setTab($param) {
+        $this->currentTab = $param;
     }
 
 }

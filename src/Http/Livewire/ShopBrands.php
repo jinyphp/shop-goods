@@ -77,6 +77,8 @@ class ShopBrands extends Component
             $this->rows[$id] = get_object_vars($item); // 객체를 배열로 변환
         }
 
+        // dd($rows);
+
         $viewFile = 'jiny-shop-goods::brand.widget';
         return view($viewFile,['brands'=>$rows]);
     }

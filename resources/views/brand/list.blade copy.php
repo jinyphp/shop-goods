@@ -5,7 +5,7 @@
         <div class="text-center">
             @if(isset($item['image']))
             <img class="w-24 mb-4 px-4"
-                src="{{$item['image']}}"
+                src="/{{$item['image']}}"
                 alt="..." />
             @else
             <img class="w-24 mb-4 px-4"

@@ -26,8 +26,8 @@ return new class extends Migration
             # 카테고리 이름
             $table->string('name');
 
-            # 특정 리소스나 페이지를 식별하는 데 사용되는 URL 친화적인 문자열
-            $table->string('slug')->unique();
+            # 특정 리소스나 페이지를 식별하는 데 사용되는 문자열
+            $table->string('slug');
         });
     }
 

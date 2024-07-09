@@ -33,6 +33,11 @@ class JinyShopGoodServiceProvider extends ServiceProvider
     {
         /* 라이브와이어 컴포넌트 등록 */
         $this->app->afterResolving(BladeCompiler::class, function () {
+
+            //test용
+            Livewire::component('ShopProductSlider',
+            \Jiny\Shop\Goods\Http\Livewire\Slider::class);
+
             Livewire::component('shop-product-list',
                 \Jiny\Shop\Goods\Http\Livewire\ShopProductList::class);
 
@@ -45,9 +50,15 @@ class JinyShopGoodServiceProvider extends ServiceProvider
             Livewire::component('ShopProductDescription',
                 \Jiny\Shop\Goods\Http\Livewire\ShopProductDescription::class);
 
-            Livewire::component('ShopProductInfomation',
-                \Jiny\Shop\Goods\Http\Livewire\ShopProductInfomation::class);
+            Livewire::component('ShopProductInformation',
+                \Jiny\Shop\Goods\Http\Livewire\ShopProductInformation::class);
 
+            // shop product 리뷰 페이지
+            Livewire::component('ShopProductReview',
+            \Jiny\Shop\Goods\Http\Livewire\ShopProductReview::class);
+
+
+            // shop 브랜드 관련
             Livewire::component('shop-brand',
                 \Jiny\Shop\Goods\Http\Livewire\ShopBrands::class);
 

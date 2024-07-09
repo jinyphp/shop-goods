@@ -43,6 +43,8 @@ class ShopProductList extends Component
         $category_id = $this->category_id;
         $paging = 16;
 
+        // dump($category_id);
+
         // 카테고리 상품 검색
         if($category_id) {
             // 카테고리 상품
@@ -60,6 +62,8 @@ class ShopProductList extends Component
             $db = DB::table('shop_products');
         }
 
+        // dump($rows);
+        // dd($db);
 
         if($this->sorting == "date") {
             $db->orderBy('created_at',"DESC");
@@ -75,6 +79,7 @@ class ShopProductList extends Component
 
 
         $viewFile = $this->getViewFile();
+        // dump($products);
         return view($viewFile,[
             'products'=>$products
         ]);

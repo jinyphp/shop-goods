@@ -1,7 +1,7 @@
 <div>
     @if($product['image'])
     <img class="card-img-top mb-5 mb-md-0"
-        src="{{$product['image']}}"
+        src="/{{$product['image']}}"
         alt="..." />
     @else
     <img class="card-img-top mb-5 mb-md-0"
