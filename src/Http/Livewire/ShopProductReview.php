@@ -12,11 +12,20 @@ use \Jiny\Html\CTag;
 
 class ShopProductReview extends Component
 {
+    public $likeCount;
+
+    public function mount() {
+        $this->likeCount = 0;
+    }
 
     public function render()
     {
 
         // dd($rows);
         return view('jiny-shop-goods::detail.productReview');
+    }
+
+    public function increaseLike(){
+        $this->likeCount += 1;
     }
 }
