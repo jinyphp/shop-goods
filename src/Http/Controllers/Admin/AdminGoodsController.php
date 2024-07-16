@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
  * 쇼핑몰 관리자: 상품 목록을 출력합니다.
  */
 use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
-class AdminProductController extends WireTablePopupForms
+class AdminGoodsController extends WireTablePopupForms
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ class AdminProductController extends WireTablePopupForms
         $this->setVisit($this);
 
         ## 연결 테이블을 지정합니다.
-        $this->actions['table'] = "shop_products";
+        $this->actions['table'] = "shop_goods";
 
         ## 테이블을 출력합니다.
         $this->actions['view']['filter'] = "jiny-shop-goods::admin.products.filter";

@@ -16,7 +16,7 @@
 
 
         <x-form-hor>
-            <x-form-label>이름</x-form-label>
+            <x-form-label>가격유형</x-form-label>
             <x-form-item>
                 {!! xInputText()
                     ->setWire('model.defer',"forms.name")
@@ -25,15 +25,7 @@
             </x-form-item>
         </x-form-hor>
 
-        <x-form-hor>
-            <x-form-label>slug</x-form-label>
-            <x-form-item>
-                {!! xInputText()
-                    ->setWire('model.defer',"forms.slug")
-                    ->setWidth("standard")
-                !!}
-            </x-form-item>
-        </x-form-hor>
+
 
 
     </x-navtab-item>
@@ -43,16 +35,6 @@
         <x-navtab-link class="rounded-0">
             <span class="d-none d-md-block">상세정보</span>
         </x-navtab-link>
-
-        <x-form-hor>
-            <x-form-label>상품수</x-form-label>
-            <x-form-item>
-                {!! xInputText()
-                    ->setWire('model.defer',"forms.goods")
-                    ->setWidth("standard")
-                !!}
-            </x-form-item>
-        </x-form-hor>
 
         <x-form-hor>
             <x-form-label>담당자</x-form-label>

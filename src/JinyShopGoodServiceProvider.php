@@ -88,6 +88,10 @@ class JinyShopGoodServiceProvider extends ServiceProvider
             Livewire::component('shop-category-breadcrumb',
                 \Jiny\Shop\Goods\Http\Livewire\ShopCategoryBreadcrumb::class);
 
+
+            Livewire::component('admin-shop-prices',
+                \Jiny\Shop\Goods\Http\Livewire\AdminShopPrices::class);
+
         });
 
 

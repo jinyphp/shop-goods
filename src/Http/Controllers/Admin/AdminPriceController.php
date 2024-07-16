@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 /**
- * 쇼핑몰 관리자: 상품 목록을 출력합니다.
+ * 쇼핑몰 관리자: 상품 가격 이력을 관리합니다.
  */
 use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
-class AdminProductController extends WireTablePopupForms
+class AdminPriceController extends WireTablePopupForms
 {
     public function __construct()
     {
@@ -20,15 +20,18 @@ class AdminProductController extends WireTablePopupForms
         $this->setVisit($this);
 
         ## 연결 테이블을 지정합니다.
-        $this->actions['table'] = "shop_products";
+        $this->actions['table'] = "shop_prices";
 
         ## 테이블을 출력합니다.
-        $this->actions['view']['filter'] = "jiny-shop-goods::admin.products.filter";
-        $this->actions['view']['list'] = "jiny-shop-goods::admin.products.list";
-        $this->actions['view']['form'] = "jiny-shop-goods::admin.products.form";
+        $this->actions['view']['filter'] = "jiny-shop-goods::admin.prices.filter";
+        $this->actions['view']['list'] = "jiny-shop-goods::admin.prices.list";
+        $this->actions['view']['form'] = "jiny-shop-goods::admin.prices.form";
 
-        $this->actions['title'] = "쇼핑몰 상품관리";
-        $this->actions['subtitle'] = "판매 가능한 모든 상품을 관리합니다.";
+        $this->actions['title'] = "쇼핑몰 상품 가격관리";
+        $this->actions['subtitle'] = "상품별 판매 가격 이력을 관리합니다.";
+
+        ## 레이아웃을 커스텀 변경합니다.
+        $this->actions['view']['layout'] = "jiny-shop-goods::admin.prices.layout";
 
     }
 

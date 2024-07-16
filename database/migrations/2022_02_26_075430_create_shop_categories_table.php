@@ -23,11 +23,23 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
-            # 카테고리 이름
-            $table->string('name');
+            ## 활성화
+            $table->string('enable')->nullable();
 
-            # 특정 리소스나 페이지를 식별하는 데 사용되는 문자열
-            $table->string('slug');
+            ## 카테고리 이름
+            $table->string('name')->nullable();
+
+            ## uri에서 카테고리를 식별하기 위한 문자열
+            $table->string('slug')->nullable();
+
+            ## 카테고리 등록 상품수
+            $table->integer('goods')->default(0);
+
+            ## 카테고리 관리자 아이디
+            $table->string('manager')->nullable();
+
+            ## 카테고리 설명
+            $table->text('description')->nullable();
         });
     }
 

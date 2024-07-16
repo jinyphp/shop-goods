@@ -1,10 +1,8 @@
 <x-wire-table>
     {{-- 테이블 제목 --}}
     <x-wire-thead>
-
-        <th width='100'>name</th>
-        <th width='100'>options</th>
-        <th>description</th>
+        <th width='200'>상품명</th>
+        <th width='200'>담당자</th>
         <th width='200'>등록일자</th>
     </x-wire-thead>
     <tbody>
@@ -12,20 +10,24 @@
             @foreach ($rows as $item)
             {{-- 테이블 리스트 --}}
             <x-wire-tbody-item :selected="$selected" :item="$item">
-                <td width='100'>
+                <td width='200'>
                     <x-click wire:click="edit({{$item->id}})">
-                    {{$item->name}}
+                        @if($item->enable)
+                            {{$item->name}}
+                        @else
+                            <span style="text-decoration-line: line-through;">
+                                {{$item->name}}
+                            </span>
+                        @endif
                     </x-click>
                 </td>
+
                 <td width='200'>
-                    <a href="/admin/shop/goods/options/{{$item->id}}/item">
-                    opt
-                    </a>
+                    {{$item->manager}}
                 </td>
-                <td>{{$item->description}}</td>
-                <td width='200'>{{$item->created_at}}</td>
-
-
+                <td width='200'>
+                    {{$item->created_at}}
+                </td>
             </x-wire-tbody-item>
             @endforeach
         @endif

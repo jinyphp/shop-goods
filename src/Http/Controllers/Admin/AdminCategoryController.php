@@ -1,16 +1,16 @@
 <?php
-
 namespace Jiny\Shop\Goods\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+/**
+ * 쇼핑몰 관리자: 카테고리
+ */
 use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
 class AdminCategoryController extends WireTablePopupForms
 {
@@ -19,13 +19,17 @@ class AdminCategoryController extends WireTablePopupForms
         parent::__construct();
         $this->setVisit($this);
 
-        ##
-        $this->actions['table'] = "shop_categories"; // 테이블 정보
+        ## 연결 테이블을 지정합니다.
+        $this->actions['table'] = "shop_categories";
 
-        //$this->actions['view_title'] = "jiny-shop::admin.category.title";
-        //$this->actions['view_filter'] = "jiny-shop::admin.category.filter";
+
+        $this->actions['view']['filter'] = "jiny-shop-goods::admin.category.filter";
         $this->actions['view']['list'] = "jiny-shop-goods::admin.category.list";
         $this->actions['view']['form'] = "jiny-shop-goods::admin.category.form";
+
+        ## 상단 타이틀 문구
+        $this->actions['title'] = "쇼핑몰 카테고리";
+        $this->actions['subtitle'] = "상품을 뷴류를 위한 목록을 관리합니다.";
 
     }
 
