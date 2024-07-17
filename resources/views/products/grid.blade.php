@@ -13,7 +13,7 @@
                     <div class="card h-100">
                         <!-- Product image-->
                         <a href="/shop/detail/{{$product->id}}">
-                        <img src="{{$product->image}}"
+                        <img src="/{{$product->image}}"
                             class="card-img-top">
                         </a>
 
