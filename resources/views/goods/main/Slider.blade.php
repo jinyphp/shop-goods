@@ -6,11 +6,11 @@
             @foreach($rows as $key => $item)
                 @if($loop->first)
                 <div class="carousel-item active">
-                    <img src="{{$item->image}}" class="d-block w-100" alt="...">
+                    <img src="/{{$item->image}}" class="d-block w-100" alt="...">
                 </div>
                 @else
                 <div class="carousel-item">
-                    <img src="{{$item->image}}" class="d-block w-100" alt="...">
+                    <img src="/{{$item->image}}" class="d-block w-100" alt="...">
                 </div>
                 @endif
 
