@@ -35,7 +35,11 @@ return new class extends Migration
             // user 이메일
             $table->string('email')->nullable();
 
+            // 좋아요 수
+            $table->unsignedBigInteger('like')->default(0);
 
+            // 싫어요 수
+            $table->unsignedBigInteger('unlike')->default(0);
         });
     }
 
