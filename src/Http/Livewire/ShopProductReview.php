@@ -14,30 +14,42 @@ use \Jiny\Html\CTag;
 class ShopProductReview extends Component
 {
     public $likeCount;
+    public $unlikeCount;
     public $slug;
-    public $productId;
 
-    public function mount($product) {
-        $this->likeCount = 0;
-        $this->productId = $product['id'];
+    public function mount(Request $request) {
+        $this->slug = $request->slug;
         // dd($product['id']);
     }
 
     public function render()
     {
-        $rows = DB::table('reviews')->where('order_item_id',$this->productId)->get();
+        // $rows = DB::table('reviews')->where('order_item_id',$this->slug)->get();
         // dump($rows);
+        $rows = DB::table('reviews')
+            ->join('shop_reviews_like', 'reviews.id', '=', 'shop_reviews_like.review_id')
+            ->get();
+
+        // dd($rows);
 
         // 배열로 변환
         $goods = $rows->map(function($row){
             return (array) $row;
         })->toArray();
         // dd($goods);
+        // $this->likeCount = $goods['like'];
+        // $this->likeCount = $goods['unlike'];
 
-        return view('jiny-shop-goods::detail.productReview', ['rows'=>$goods]);
+        $viewFile = 'jiny-shop-goods::shop-electronics.product_review';
+
+        return view($viewFile, ['goods'=>$goods]);
     }
 
     public function increaseLike(){
         $this->likeCount += 1;
+    }
+
+    public function increaseUnLike(){
+        $this->unlikeCount += 1;
     }
 }
