@@ -36,8 +36,8 @@
                 <div class="hstack fs-sm gap-1">
                 {{$i}}<i class="ci-star-filled text-warning"></i>
                 </div>
-                <div class="progress w-100" role="progressbar" aria-label="Five stars" aria-valuenow="{{$ratings[$i]/ $total_review * 100}}" aria-valuemin="0" aria-valuemax="100" style="height: 4px">
-                <div class="progress-bar bg-warning rounded-pill" style="width: {{$ratings[$i]/ $total_review * 100}}%"></div>
+                <div class="progress w-100" role="progressbar" aria-label="Five stars" aria-valuenow="{{$ratio[$i]}}" aria-valuemin="0" aria-valuemax="100" style="height: 4px">
+                <div class="progress-bar bg-warning rounded-pill" style="width: {{$ratio[$i]}}%"></div>
                 </div>
                 <div class="fs-sm text-nowrap text-end" style="width: 40px;">{{$ratings[$i]}}</div>
             </div>

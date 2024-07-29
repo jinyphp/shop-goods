@@ -24,6 +24,7 @@ class ShopProductReview extends Component
     public $likeArr;
     // 상품 배열
     public $goods;
+    public $ratio;
 
     public function mount(Request $request) {
         // 변수 초기화
@@ -31,11 +32,13 @@ class ShopProductReview extends Component
         $this->ratings = array(6);
         for ($i = 0; $i < 5; $i++) {
             $this->ratings[$i + 1] = 0;
+            $this->ratio[$i+1] = 0;
         }
 
         // 리뷰 조회
         $rows = DB::table('reviews')
             ->join('shop_reviews_like', 'reviews.id', '=', 'shop_reviews_like.review_id')
+            ->where('order_item_id', $this->slug)
             ->get();
 
         // dd($rows);
@@ -53,13 +56,21 @@ class ShopProductReview extends Component
         $this->total_review = count($goods);
 
         // review 평점 평균
-        $this->rating_avg =  round($this->rating_avg /  $this->total_review, 1);
+        $this->rating_avg =  $this->total_review == 0 ? 0 : round($this->rating_avg /  $this->total_review, 1);
+
+        // dd($this->total_review);
+        for ($i = 0; $i < 5; $i++) {
+            if ($this->total_review != 0) {
+                $this->ratio[$i+1] = $this->ratings[$i+1] / $this->total_review * 100;
+            }
+        }
+        // dd($this->ratio);
     }
 
     public function render()
     {
 
-        // dd($goods);
+        // dd($this->goods);
 
         $viewFile = 'jiny-shop-goods::shop-electronics.product_review';
 
