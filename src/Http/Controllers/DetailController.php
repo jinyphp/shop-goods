@@ -67,7 +67,7 @@ class DetailController extends Controller
 
 
 
-        $viewFile = 'jiny-shop-goods::detail.layout';
+        $viewFile = 'www::shop-electronics.shop-product-general-electronics';
 
         // 임시 초기화
         $cart_idx = null;

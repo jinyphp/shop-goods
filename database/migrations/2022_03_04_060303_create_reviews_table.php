@@ -24,6 +24,9 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
+            # 리뷰 텍스트
+            $table->string('title');
+
             # 상품 별점 정보
             $table->integer('rating');
 
@@ -36,7 +39,7 @@ return new class extends Migration
             # 외래키 제약 조건 (상품 삭제시 리뷰까지 같이 삭제)
             $table->foreign('order_item_id')
                 ->references('id')
-                ->on('shop_order_items')
+            ->on('shop_order_items')
                 ->onDelete('cascade');
         });
     }

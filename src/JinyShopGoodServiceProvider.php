@@ -34,6 +34,17 @@ class JinyShopGoodServiceProvider extends ServiceProvider
         /* 라이브와이어 컴포넌트 등록 */
         $this->app->afterResolving(BladeCompiler::class, function () {
 
+            // Electronics 분리용 컴포넌트
+            Livewire::component('product-gallery',
+            \Jiny\Shop\Goods\Http\Livewire\ShopProductGallery::class);
+
+            Livewire::component('product-option',
+            \Jiny\Shop\Goods\Http\Livewire\ShopProductOption::class);
+
+            // shop product 리뷰 페이지
+            Livewire::component('product-review',
+            \Jiny\Shop\Goods\Http\Livewire\ShopProductReview::class);
+
             //test용
             Livewire::component('ShopProductSlider',
             \Jiny\Shop\Goods\Http\Livewire\Slider::class);
@@ -52,11 +63,6 @@ class JinyShopGoodServiceProvider extends ServiceProvider
 
             Livewire::component('ShopProductInformation',
                 \Jiny\Shop\Goods\Http\Livewire\ShopProductInformation::class);
-
-            // shop product 리뷰 페이지
-            Livewire::component('ShopProductReview',
-            \Jiny\Shop\Goods\Http\Livewire\ShopProductReview::class);
-
 
             // shop 브랜드 관련
             Livewire::component('shop-brand',

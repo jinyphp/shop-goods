@@ -24,9 +24,8 @@ class Slider extends Component
     public function render()
     {
         // dd($this->product);
-        $rows = DB::table('shop_product_images')
-            ->where('product_id',$this->product['id'])->get();
-
+        $rows = DB::table('shop_goods_images')
+            ->where('goods',$this->product['id'])->get();
 
         // dd($rows);
         return view('jiny-shop-goods::goods.main.Slider',[

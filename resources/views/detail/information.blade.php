@@ -25,7 +25,7 @@
             @livewire("ShopProductDescription", ['product'=>$product])
         @elseif ($currentTab === 'reviews')
             {{-- 상품 후기 --}}
-            @livewire('ShopProductReview')
+            @livewire('ShopProductReview', ['product'=>$product])
         @elseif ($currentTab === 'styles')
             {{-- 상품 사이즈 --}}
             {{-- @livewire('ShopProductSize') --}}
