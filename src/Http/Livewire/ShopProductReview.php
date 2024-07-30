@@ -70,20 +70,37 @@ class ShopProductReview extends Component
     public function render()
     {
 
-        // dd($this->goods);
-
         $viewFile = 'jiny-shop-goods::shop-electronics.product_review';
 
         return view($viewFile);
     }
 
+    // DB에 업데이트한 쿼리 조회
+    public function updateLike($id) {
+        $row = DB::table('shop_reviews_like')
+        ->where('id', $id)
+        ->first();
+
+        // likeArr update
+        $this->likeArr[$id]['like'] = $row->like;
+        $this->likeArr[$id]['unlike'] = $row->unlike;
+
+        // dd($row);
+    }
+
     public function increaseLike($id){
         // 해당리뷰의 like 증가
-        $this->likeArr[$id]['like']++;
+        DB::table('shop_reviews_like')->where('id', $id)->increment('like');
+
+        // 좋아요 다시 조회
+        $this->updateLike($id);
     }
 
     public function increaseUnLike($id){
         // 해당리뷰의 unlike 증가
-        $this->likeArr[$id]['unlike']++;
+        DB::table('shop_reviews_like')->where('id', $id)->increment('unlike');
+
+        // 좋아요 다시 조회
+        $this->updateLike($id);
     }
 }
