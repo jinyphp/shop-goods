@@ -41,6 +41,12 @@ class JinyShopGoodServiceProvider extends ServiceProvider
             Livewire::component('product-option',
             \Jiny\Shop\Goods\Http\Livewire\ShopProductOption::class);
 
+            Livewire::component('product-catalog',
+            \Jiny\Shop\Goods\Http\Livewire\ShopProductCatalog::class);
+
+            Livewire::component('product-nav-reviews',
+            \Jiny\Shop\Goods\Http\Livewire\ShopProductNavReviews::class);
+
             // shop product 리뷰 페이지
             Livewire::component('product-review',
             \Jiny\Shop\Goods\Http\Livewire\ShopProductReview::class);

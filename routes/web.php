@@ -82,7 +82,7 @@ Route::middleware(['web'])
     // 카트질라 테스트용
 
 
-    // 특정 상품목록
+    // 특정 상품카테고리목록
     Route::get('/products/{slug?}', [
         \Jiny\Shop\Goods\Http\Controllers\SpecificProductsController::class,
         "index"])
