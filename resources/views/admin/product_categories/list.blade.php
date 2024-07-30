@@ -5,6 +5,9 @@
             <th width='20'>
                 <input type='checkbox' class="form-check-input" wire:model="selectedall">
             </th>
+            <th width='100'>ref</th>
+            <th width='100'>level</th>
+            <th width='100'>pos</th>
             <th width='100'>product_id</th>
             <th width='100'>category_id</th>
 
@@ -18,6 +21,9 @@
 
                 <td width='100'>{{$item->product_id}}</td>
                 <td width='100'>{{$item->category_id}}</td>
+                <td width='100'>{{$item->ref}}</td>
+                <td width='100'>{{$item->level}}</td>
+                <td width='100'>{{$item->pos}}</td>
 
 
             </x-wire-tbody-item>
