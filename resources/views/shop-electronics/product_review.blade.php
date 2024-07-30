@@ -14,13 +14,13 @@
 
         <!-- Overall rating card -->
         <div class="d-flex flex-column align-items-center justify-content-center h-100 bg-body-tertiary rounded p-4">
-        <div class="h1 pb-2 mb-1">{{$rating_avg}}</div>
+        <div class="h1 pb-2 mb-1">{{$ratingAvg}}</div>
         <div class="hstack justify-content-center gap-1 fs-sm mb-2">
-            @for($i = 0; $i < intVal($rating_avg); $i++)
+            @for($i = 0; $i < intVal($ratingAvg); $i++)
                 <i class="ci-star-filled text-warning"></i>
             @endfor
 
-            @for($i = 5 - intVal($rating_avg); $i > 0; $i--)
+            @for($i = 5 - intVal($ratingAvg); $i > 0; $i--)
                 <i class="ci-star text-body-tertiary opacity-60"></i>
             @endfor
         </div>
@@ -80,12 +80,12 @@
                 <span class="animate-target">Reply</span>
                 </button>
                 <button type="button" class="nav-link text-body-secondary animate-scale px-0 ms-auto me-n1">
-                <i class="ci-thumbs-up fs-base animate-target me-1" wire:click="increaseLike({{$item['id']}})"></i>
+                <i class="ci-thumbs-up text-success fs-base animate-target me-1"" wire:click="increaseLike({{$item['id']}})"></i>
                 {{$likeArr[$item['id']]['like']}}
                 </button>
                 <hr class="vr my-2 mx-3">
                 <button type="button" class="nav-link text-body-secondary animate-scale px-0 ms-n1">
-                <i class="ci-thumbs-down fs-base animate-target me-1" wire:click="increaseUnLike({{$item['id']}})"></i>
+                <i class="ci-thumbs-down text-danger fs-base animate-target me-1" wire:click="increaseUnLike({{$item['id']}})"></i>
                 {{$likeArr[$item['id']]['unlike']}}
                 </button>
             </div>

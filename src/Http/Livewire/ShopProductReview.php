@@ -19,7 +19,7 @@ class ShopProductReview extends Component
     // 1 ~5 변점 counting 배열
     public $ratings;
     // review 별점 평균
-    public $rating_avg;
+    public $ratingAvg;
     // 각 리뷰별 like, unlike 관리배열
     public $likeArr;
     // 상품 배열
@@ -45,19 +45,20 @@ class ShopProductReview extends Component
 
         // 배열로 변환
         $goods = $rows->map(function($row){
-            $this->ratings[$row->rating]++;
-            $this->rating_avg += $row->rating;
             $this->likeArr[$row->id] =  ['like'=> $row->like, 'unlike'=> $row->unlike];
             return (array) $row;
         })->toArray();
         $this->goods = $goods;
 
-        // total_review 수 계산
-        $this->total_review = count($goods);
+        // 상품에 대한 별점 정보 얻어와서 변수 세팅
+        $data = getProductStarInfo($request->slug);
+        $this->total_review = $data['totalReview'];
+        $this->ratingAvg = $data['starAvg'];
+        $this->ratings = $data['starCount'];
 
-        // review 평점 평균
-        $this->rating_avg =  $this->total_review == 0 ? 0 : round($this->rating_avg /  $this->total_review, 1);
-
+        // dd($data);
+        // livewire에 event 발생
+        $this->sendData();
         // dd($this->total_review);
         for ($i = 0; $i < 5; $i++) {
             if ($this->total_review != 0) {
@@ -102,5 +103,10 @@ class ShopProductReview extends Component
 
         // 좋아요 다시 조회
         $this->updateLike($id);
+    }
+
+    public function sendData()
+    {
+        $this->dispatch('dataSent', ['totalReview'=> $this->total_review, 'ratingAvg'=> $this->ratingAvg]);
     }
 }

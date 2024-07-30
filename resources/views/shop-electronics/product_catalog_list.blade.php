@@ -348,13 +348,15 @@
                 <div class="w-100 min-w-0 px-1 pb-2 px-sm-3 pb-sm-3">
                     <div class="d-flex align-items-center gap-2 mb-2">
                     <div class="d-flex gap-1 fs-xs">
-                        <i class="ci-star-filled text-warning"></i>
-                        <i class="ci-star-filled text-warning"></i>
-                        <i class="ci-star-filled text-warning"></i>
-                        <i class="ci-star-filled text-warning"></i>
-                        <i class="ci-star text-body-tertiary opacity-75"></i>
+                        @for($i = 0; $i < intVal($starInfo[$item['id']]['starAvg']); $i++)
+                            <i class="ci-star-filled text-warning"></i>
+                        @endfor
+
+                        @for($i = 5 - intVal($starInfo[$item['id']]['starAvg']); $i > 0; $i--)
+                            <i class="ci-star text-body-tertiary opacity-60"></i>
+                        @endfor
                     </div>
-                    <span class="text-body-tertiary fs-xs">(123)</span>
+                    <span class="text-body-tertiary fs-xs">({{$starInfo[$item['id']]['totalReview']}})</span>
                     </div>
                     <h3 class="pb-1 mb-2">
                     <a class="d-block fs-sm fw-medium text-truncate" href="shop-product-general-electronics">
@@ -397,10 +399,8 @@
             </div>
             @endforeach
 
-
-            {{-- 배너이미지 임시 주석 --}}
-            <!-- Banner -->
-            {{-- <div class="position-relative rounded-5 overflow-hidden mb-4">
+            {{-- <!-- Banner -->
+            <div class="position-relative rounded-5 overflow-hidden mb-4">
                 <span class="position-absolute top-0 start-0 w-100 h-100 d-none-dark rtl-flip" style="background: linear-gradient(-90deg, #accbee 0%, #e7f0fd 100%)"></span>
                 <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-block-dark rtl-flip" style="background: linear-gradient(-90deg, #1b273a 0%, #1f2632 100%)"></span>
                 <div class="row align-items-center position-relative z-1">
@@ -416,26 +416,26 @@
                     </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="row row-cols-2 row-cols-md-3 g-4">
 
-            <!-- Banner -->
-            {{-- <div class="col" data-bs-theme="dark">
-                <div class="d-flex flex-column align-items-center justify-content-end h-100 text-center overflow-hidden rounded-5 px-4 px-lg-3 pt-4 pb-4" style="background: #1d2c41 url(/assets/img/shop/electronics/banners/background.jpg) center/cover no-repeat">
-                <div class="ratio animate-up-down position-relative z-2 me-lg-4" style="max-width: 320px; margin-bottom: -22%; --cz-aspect-ratio: calc(256 / 260 * 100%)">
-                    <img src="/assets/img/shop/electronics/banners/laptop.png" alt="Laptop">
+                <!-- Banner -->
+                <div class="col" data-bs-theme="dark">
+                    <div class="d-flex flex-column align-items-center justify-content-end h-100 text-center overflow-hidden rounded-5 px-4 px-lg-3 pt-4 pb-4" style="background: #1d2c41 url(/assets/img/shop/electronics/banners/background.jpg) center/cover no-repeat">
+                    <div class="ratio animate-up-down position-relative z-2 me-lg-4" style="max-width: 320px; margin-bottom: -22%; --cz-aspect-ratio: calc(256 / 260 * 100%)">
+                        <img src="/assets/img/shop/electronics/banners/laptop.png" alt="Laptop">
+                    </div>
+                    <h3 class="display-5 mb-2">MacBook</h3>
+                    <p class="text-body fs-sm fw-medium mb-3">Be Pro Anywhere</p>
+                    <a class="btn btn-sm btn-primary mb-2" href="#!">
+                        From $1,199
+                        <i class="ci-arrow-up-right fs-base ms-1 me-n1"></i>
+                    </a>
+                    </div>
                 </div>
-                <h3 class="display-5 mb-2">MacBook</h3>
-                <p class="text-body fs-sm fw-medium mb-3">Be Pro Anywhere</p>
-                <a class="btn btn-sm btn-primary mb-2" href="#!">
-                    From $1,199
-                    <i class="ci-arrow-up-right fs-base ms-1 me-n1"></i>
-                </a>
-                </div>
-            </div> --}}
 
-            </div>
+            </div> --}}
 
         </div>
         <!-- Pagination -->
