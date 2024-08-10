@@ -4,19 +4,12 @@ namespace Jiny\Shop\Goods\Http\Livewire;
 use Illuminate\Support\Facades\Blade;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
-
-//use Webuni\FrontMatter\FrontMatter;
-//use Jiny\Pages\Http\Parsedown;
-
 use Livewire\WithPagination;
-//use Jiny\Shop\Entities\ShopProducts;
-//use Jiny\Shop\Entities\ShopCategory as Category;
-//use Cart;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 
 
-class ShopProductList extends Component
+class ShopGoodsList extends Component
 {
     use WithPagination;
 
@@ -31,39 +24,60 @@ class ShopProductList extends Component
 
     public $cartidx; // 카트번호
 
+    public $viewGrid;
+    public $viewList;
+    public $viewCell;
+
     public function mount()
     {
         $this->sorting = "default";
         $this->pagesize = 12;
+
+        if(!$this->viewGrid) {
+            $this->viewGrid = "jiny-shop-goods::goods.grid";
+        }
+
+        if(!$this->viewList) {
+            $this->viewList = 'jiny-shop-goods::goods.list';
+        }
+
+        if(!$this->viewCell) {
+            $this->viewCell = "www::shop_fashion-v1._partials.goods.cell";
+        }
     }
 
     public function render()
     {
-        $category_id = $this->category_id;
         $paging = 16;
+        $viewFile = $this->getViewFile($paging);
+        return view($viewFile,[
+            'products'=>$this->getGoods($paging)
+        ]);
+    }
 
-        // dump($category_id);
+    private function getGoods($paging)
+    {
+        $db = DB::table('shop_goods');
 
+        /*
+        $category_id = $this->category_id;
         // 카테고리 상품 검색
         if($category_id) {
-            // 카테고리 상품
-            $rows = DB::table('shop_product_categories')
-                ->where('category_id', $category_id)->get();
-
+            $rows = $this->getCategory($category_id);
             $ids = [];
             foreach($rows as $row) {
                 $ids []= $row->product_id;
             }
 
-            $db = DB::table('shop_products')->whereIn('id',$ids);
+            $db = DB::table('shop_goods')->whereIn('id',$ids);
+
         } else {
             // 전체상품
-            $db = DB::table('shop_products');
+
         }
+            */
 
-        // dump($rows);
-        // dd($db);
-
+        // 정렬방식 선택
         if($this->sorting == "date") {
             $db->orderBy('created_at',"DESC");
         } else
@@ -74,23 +88,24 @@ class ShopProductList extends Component
             $db->orderBy('regular_price',"DESC");
         }
 
-        $products = $db->paginate($paging);
-
-
-        $viewFile = $this->getViewFile();
-        // dump($products);
-        return view($viewFile,[
-            'products'=>$products
-        ]);
+        return $db->paginate($paging);
     }
 
+    private function getCategory($category_id)
+    {
+        // 카테고리
+        $row = DB::table('shop_product_categories')
+            ->where('category_id', $category_id)
+            ->first();
+        return $row;
+    }
 
     private function getViewFile()
     {
         if($this->display == "list") {
-            return 'jiny-shop-goods::products.list';
+            return $this->viewList;
         } else {
-            return 'jiny-shop-goods::products.grid';
+            return $this->viewGrid;
         }
     }
 
@@ -112,6 +127,39 @@ class ShopProductList extends Component
     }
 
 
+    /**
+     * 관심상품 등록
+     */
+    public function addWish($id)
+    {
+        //dd($id);
+        if(Auth::check()) {
+            $email = Auth::user()->email;
+
+            // 카트 갯수
+            session()->increment('wish');
+
+            // 신규상품 등록
+            $product = DB::table('shop_goods')->where('id',$id)->first();
+
+            if(!$product->name) {
+                $product->name = "temp";
+            }
+
+            $data = [
+                'email'=>$email,
+                'product_id'=>$product->id,
+                'product'=>$product->name,
+                'image'=>$product->image,
+                'price'=>$product->sale_price
+            ];
+            DB::table('shop_wish')->insert($data);
+
+            // wish 컴포넌트 갱신
+            //$this->emit('refreshComponent');
+            $this->dispatch('refreshComponent');
+        }
+    }
 
 
     /**
@@ -170,30 +218,5 @@ class ShopProductList extends Component
         $this->popupCart = false;
     }
 
-    /**
-     * 관심상품 등록
-     */
-    public function addWish($id)
-    {
-        if(Auth::check()) {
-            $email = Auth::user()->email;
 
-            // 카트 갯수
-            session()->increment('wish');
-
-            // 신규상품 등록
-            $product = DB::table('shop_products')->where('id',$id)->first();
-            $data = [
-                'email'=>$email,
-                'product_id'=>$product->id,
-                'product'=>$product->name,
-                'image'=>$product->image
-            ];
-
-            DB::table('shop_wish')->insert($data);
-
-            // wish 컴포넌트 갱신
-            $this->emit('refreshComponent');
-        }
-    }
 }

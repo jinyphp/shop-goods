@@ -13,6 +13,7 @@ class JinyShopGoodServiceProvider extends ServiceProvider
     {
         // 모듈: 라우트 설정
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
         $this->loadViewsFrom(__DIR__.'/../resources/views', $this->package);
 
         // 데이터베이스
@@ -55,8 +56,13 @@ class JinyShopGoodServiceProvider extends ServiceProvider
             Livewire::component('ShopProductSlider',
             \Jiny\Shop\Goods\Http\Livewire\Slider::class);
 
+            ## 상품 목록을 출력합니다.
             Livewire::component('shop-product-list',
                 \Jiny\Shop\Goods\Http\Livewire\ShopProductList::class);
+            Livewire::component('shop-goods-list',
+                \Jiny\Shop\Goods\Http\Livewire\ShopGoodsList::class);
+
+
 
             Livewire::component('ShopProductImage',
                 \Jiny\Shop\Goods\Http\Livewire\ShopProductImage::class);
@@ -74,7 +80,7 @@ class JinyShopGoodServiceProvider extends ServiceProvider
             Livewire::component('shop-brand',
                 \Jiny\Shop\Goods\Http\Livewire\ShopBrands::class);
 
-
+            // Drag 상품올리기
             Livewire::component('shop-product-upload-drag',
                 \Jiny\Shop\Goods\Http\Livewire\ShopProductUploadDrag::class);
 

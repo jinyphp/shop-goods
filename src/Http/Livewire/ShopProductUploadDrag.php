@@ -1,5 +1,4 @@
 <?php
-
 namespace Jiny\Shop\Goods\Http\Livewire;
 
 use Illuminate\Support\Facades\Blade;

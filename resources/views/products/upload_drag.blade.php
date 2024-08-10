@@ -1,96 +1,96 @@
 @push('css')
-        <style>
-            .dropzone {
-                width: 100%;
-                height: 100px;
-                line-height: 100px;
-                text-align: center;
-                color: #333;
-                border:1px dashed #ccc;
-                background-color: rgb(250,250,250);
-            }
+    <style>
+        .dropzone {
+            width: 100%;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            color: #333;
+            border:1px dashed #ccc;
+            background-color: rgb(250,250,250);
+        }
 
-            .dropzone li {
-                background-color: white;
-            }
+        .dropzone li {
+            background-color: white;
+        }
 
-            .dropzone.dragover {
-                border-color:#333;
-                /* background-color: #6990F2; */
-                background-color: rgb(240,240,240);
-                color:#000;
-            }
+        .dropzone.dragover {
+            border-color:#333;
+            /* background-color: #6990F2; */
+            background-color: rgb(240,240,240);
+            color:#000;
+        }
 
 
-            section .row{
-                /* margin-bottom: 10px; */
-                /* background: #E9F0FF; */
-                list-style: none;
-                padding: 5px 10px;
-                border-radius: 5px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
+        section .row{
+            /* margin-bottom: 10px; */
+            /* background: #E9F0FF; */
+            list-style: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-            section .details span{
-                font-size: 14px;
-            }
+        section .details span{
+            font-size: 14px;
+        }
 
-            .progress-area .row .content{
-                width: 100%;
-                margin-left: 15px;
-            }
+        .progress-area .row .content{
+            width: 100%;
+            margin-left: 15px;
+        }
 
-            .progress-area .details{
-                display: flex;
-                align-items: center;
-                margin-bottom: 7px;
-                justify-content: space-between;
-            }
+        .progress-area .details{
+            display: flex;
+            align-items: center;
+            margin-bottom: 7px;
+            justify-content: space-between;
+        }
 
-            .progress-area .content .progress-bar{
-                height: 6px;
-                width: 100%;
-                margin-bottom: 4px;
-                background: #fff;
-                border-radius: 30px;
-            }
+        .progress-area .content .progress-bar{
+            height: 6px;
+            width: 100%;
+            margin-bottom: 4px;
+            background: #fff;
+            border-radius: 30px;
+        }
 
-            .content .progress-bar .progress{
-                height: 100%;
-                width: 0%;
-                background: #6990F2;
-                border-radius: inherit;
-            }
+        .content .progress-bar .progress{
+            height: 100%;
+            width: 0%;
+            background: #6990F2;
+            border-radius: inherit;
+        }
 
-            .uploaded-area{
-                max-height: 232px;
-                overflow-y: scroll;
-            }
-            .uploaded-area.onprogress{
-                max-height: 150px;
-            }
-            .uploaded-area::-webkit-scrollbar{
-                width: 0px;
-            }
-            .uploaded-area .row .content{
-                display: flex;
-                align-items: center;
-            }
-            /*
-            .uploaded-area .row .details{
-                display: flex;
-                margin-left: 15px;
-                flex-direction: column;
-            }
-            */
-            .uploaded-area .row .details .size{
-                color: #404040;
-                font-size: 11px;
-            }
+        .uploaded-area{
+            max-height: 232px;
+            overflow-y: scroll;
+        }
+        .uploaded-area.onprogress{
+            max-height: 150px;
+        }
+        .uploaded-area::-webkit-scrollbar{
+            width: 0px;
+        }
+        .uploaded-area .row .content{
+            display: flex;
+            align-items: center;
+        }
+        /*
+        .uploaded-area .row .details{
+            display: flex;
+            margin-left: 15px;
+            flex-direction: column;
+        }
+        */
+        .uploaded-area .row .details .size{
+            color: #404040;
+            font-size: 11px;
+        }
 
-        </style>
+    </style>
 @endpush
 
 <div>
@@ -104,7 +104,7 @@
     <section class="progress-area"></section>
     <ul class="uploaded-area"></ul>
 </div>
-
+{{--
 @script
 <script>
     function drag_upload_success()
@@ -112,7 +112,7 @@
         $wire.dispatch('reflash');
     }
 </script>
-@endscript
+@endscript --}}
 
 @push('script')
 <script>
@@ -176,13 +176,13 @@
         xhr.onload = function() {
             var data = JSON.parse(this.responseText);
             console.log(data);
-
             console.log("갱신요청");
 
             // 라이브와이어 테이블 갱신
             //Livewire.emit('reflash');
 
-            drag_upload_success();
+            //drag_upload_success();
+            window.location.reload();
         }
 
         xhr.send(data);
