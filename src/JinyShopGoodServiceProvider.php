@@ -80,6 +80,17 @@ class JinyShopGoodServiceProvider extends ServiceProvider
             Livewire::component('shop-brand',
                 \Jiny\Shop\Goods\Http\Livewire\ShopBrands::class);
 
+            // 상품목록 사이드바, 브랜드 필터링
+            Livewire::component('shop-brand-filter',
+                \Jiny\Shop\Goods\Http\Livewire\ShopBrandsFilter::class);
+
+            Livewire::component('shop-price-filter',
+                \Jiny\Shop\Goods\Http\Livewire\ShopPriceFilter::class);
+
+            Livewire::component('shop-option-filter',
+                \Jiny\Shop\Goods\Http\Livewire\ShopOptionFilter::class);
+
+
             // Drag 상품올리기
             Livewire::component('shop-product-upload-drag',
                 \Jiny\Shop\Goods\Http\Livewire\ShopProductUploadDrag::class);

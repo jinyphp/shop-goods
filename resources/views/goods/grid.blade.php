@@ -1,7 +1,7 @@
 <div>
     <!-- Sorting -->
     <div class="d-sm-flex align-items-center justify-content-between mt-n2 mb-3 mb-sm-4">
-        <div class="fs-sm text-body-emphasis text-nowrap">Found <span class="fw-semibold">32</span> items</div>
+        <div class="fs-sm text-body-emphasis text-nowrap">Found <span class="fw-semibold">{{$foundItems}}</span> items</div>
         <div class="d-flex align-items-center text-nowrap">
             <label class="form-label fw-semibold mb-0 me-2">Sort by:</label>
             <div style="width: 190px">
@@ -21,6 +21,15 @@
             </div>
         </div>
     </div>
+
+    @foreach ($filters as $key => $filter)
+        {{$key}} =
+        @foreach ($filter as $i => $item)
+        {{$i}}->{{$item}},
+        @endforeach
+
+
+    @endforeach
 
     <div class="row gy-4 gy-md-5 pb-4 pb-md-5">
         @foreach ($products as $product)

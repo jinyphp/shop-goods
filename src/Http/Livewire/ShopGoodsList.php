@@ -28,6 +28,11 @@ class ShopGoodsList extends Component
     public $viewList;
     public $viewCell;
 
+    public $filters = [];
+    public $options = [];
+
+    public $foundItems;
+
     public function mount()
     {
         $this->sorting = "default";
@@ -51,13 +56,64 @@ class ShopGoodsList extends Component
         $paging = 16;
         $viewFile = $this->getViewFile($paging);
         return view($viewFile,[
-            'products'=>$this->getGoods($paging)
+            'products'=>$this->fetch($paging)
         ]);
     }
 
-    private function getGoods($paging)
+    private function fetch($paging)
     {
         $db = DB::table('shop_goods');
+
+        // 조건필터 추가
+        if($this->filters) {
+            foreach($this->filters as $key => $filter) {
+                // _시작하는 키의 경우 range 처리
+                if($key[0] == '_') {
+                    $field = trim($key,'_');
+                    //dd($field);
+                    if(isset($filter['range1']) && $filter['range1']) {
+                        $db->where($field ,'>=', $filter['range1']);
+                    }
+
+                    if(isset($filter['range2']) && $filter['range2']) {
+                        $db->where($field ,'<=', $filter['range2']);
+                    }
+
+                } else if($key[0] == '*') {
+                    // or like
+                    $field = trim($key,'*');
+                    foreach($filter as $value) {
+                        if($value) {
+                            $db->orWhere($field, 'like', '%'.$value.';%');
+                        }
+                    }
+                }
+                else {
+                    // $filer가 빈 배열이 아는 경우에만 처리
+                    if($filter) {
+                        $db->whereIn($key, $filter);
+                    }
+                }
+
+
+                // foreach($filter as $value) {
+                //     $db->whereOr($key,'like','%'.$value.'%');
+                // }
+            }
+        }
+
+        // 옵션 필터링
+        if($this->options) {
+            //dump($this->options);
+            foreach($this->options as $key => $option) {
+                foreach($option as $value) {
+                    if($value) {
+                        //dump($value);
+                        $db->orWhere('option', 'like', '%'.$value.';%');
+                    }
+                }
+            }
+        }
 
         /*
         $category_id = $this->category_id;
@@ -87,6 +143,9 @@ class ShopGoodsList extends Component
         if($this->sorting == "price-desc") {
             $db->orderBy('regular_price',"DESC");
         }
+
+        // found Items
+        $this->foundItems = $db->count();
 
         return $db->paginate($paging);
     }
@@ -218,5 +277,27 @@ class ShopGoodsList extends Component
         $this->popupCart = false;
     }
 
+    /**
+     * 이벤트
+     */
+    protected $listeners = [
+        'setFilter', 'setOptions'
+    ];
+
+    public function setFilter($value)
+    {
+        foreach($value as $key => $item) {
+            $this->filters[$key] = $item;
+        }
+
+    }
+
+    public function setOptions($value)
+    {
+        foreach($value as $key => $item) {
+            $this->options[$key] = $item;
+        }
+
+    }
 
 }

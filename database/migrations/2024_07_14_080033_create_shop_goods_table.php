@@ -47,19 +47,24 @@ return new class extends Migration
             # 상품에 대한 긴 설명
             $table->text('description')->nullable();
 
-            ## 정가
-            $table->decimal('regular_price')->nullable();
+            ## 브랜드
+            $table->string('brand')->nullable();
 
-            # 할인가
-            $table->decimal('sale_price')->nullable();
+            ## 가격
+            $table->string('price')->nullable();
+            $table->decimal('regular_price')->nullable(); // 정가
+            $table->string('discount')->nullable(); // 할인
+            $table->decimal('sale_price')->nullable(); // 할인가
 
             # 단체 가격
             $table->string('unit_price')->nullable();   // 단체 가격
 
-            # 옵션 가격
+            ## 옵션
+            $table->string('option')->nullable();
             $table->string('option_price')->nullable(); // 옵션 가격
 
             # 이벤트 가격
+            $table->string('event')->nullable();
             $table->string('event_price')->nullable();  // 이벤트 가격
 
             # 상품 반품 허용 여부
@@ -88,9 +93,6 @@ return new class extends Migration
             $table->bigInteger('category_id')->unsigned()->nullable();
 
             //$table->foreign('category_id')->references('id')->on('shop_categories')->onDelete('cascade');
-
-            // 상품 옵션
-            $table->string('option')->nullable();
 
 
             //상품 무료 배송 여부
