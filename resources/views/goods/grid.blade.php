@@ -6,17 +6,12 @@
             <label class="form-label fw-semibold mb-0 me-2">Sort by:</label>
             <div style="width: 190px">
                 <select class="form-select border-0 rounded-0 px-1"
-                    data-select='{
-              "removeItemButton": false,
-              "classNames": {
-                "containerInner": "form-select border-0 rounded-0 px-1"
-              }
-            }'>
-                    <option value="Relevance">Relevance</option>
-                    <option value="Popularity">Popularity</option>
-                    <option value="Price: Low to High">Price: Low to High</option>
-                    <option value="Price: High to Low">Price: High to Low</option>
-                    <option value="Newest Arrivals">Newest Arrivals</option>
+                wire:model.live="sorting">
+                    {{-- <option value="Relevance">Relevance</option>
+                    <option value="Popularity">Popularity</option> --}}
+                    <option value="price:desc">Price: Low to High</option>
+                    <option value="Price:asc">Price: High to Low</option>
+                    <option value="created_at:desc">최신등록순</option>
                 </select>
             </div>
         </div>

@@ -89,7 +89,9 @@ return new class extends Migration
             # 상품 이미지
             $table->string('image')->nullable();
 
-            # 상품의 카테고리 id
+            ## 카테고리 문자열;
+            $table->string('category')->nullable();
+            ## 상품의 카테고리 id
             $table->bigInteger('category_id')->unsigned()->nullable();
 
             //$table->foreign('category_id')->references('id')->on('shop_categories')->onDelete('cascade');

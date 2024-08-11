@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Livewire\Attributes\On;
 
 
@@ -14,13 +15,13 @@ class ShopGoodsList extends Component
     use WithPagination;
 
     public $cate;
+    public $cate_id;
+    public $category = [];
+
     public $display = "grid"; // "list"
 
     public $sorting;
-    public $pagesize;
-    //public $slug;
-    public $category_id;
-    public $cate_id;
+    public $paging = 16;
 
     public $cartidx; // 카트번호
 
@@ -35,42 +36,149 @@ class ShopGoodsList extends Component
 
     public function mount()
     {
-        $this->sorting = "default";
-        $this->pagesize = 12;
-
+        // 그리드 화면 주입
         if(!$this->viewGrid) {
             $this->viewGrid = "jiny-shop-goods::goods.grid";
         }
 
+        // 리스트 화면 주입
         if(!$this->viewList) {
             $this->viewList = 'jiny-shop-goods::goods.list';
         }
 
+        // 단위셀 화면주입
         if(!$this->viewCell) {
             $this->viewCell = "www::shop_fashion-v1._partials.goods.cell";
         }
+
+        // 카테고리 코드 확인
+        if($cate = $this->getCeteCode()) {
+            $this->cate = $cate;
+            $rows = DB::table('shop_categories')
+                ->where('name',$cate)
+                ->first();
+
+            if($rows) {
+                $this->category = [];
+                foreach($rows as $key => $value) {
+                    $this->category[$key] = $value;
+                }
+            }
+        }
+
+        // 장바구니 카트번호 확인
+        if($cartidx = $this->checkUserCartIdx()) {
+            $this->cartidx = $cartidx;
+        } else {
+            $this->cartidx = $this->generateUniqueCartId();
+        }
+
+        //
+
     }
 
+    ## 화면 렌더링
     public function render()
     {
-        $paging = 16;
-        $viewFile = $this->getViewFile($paging);
+        // 화면 타입 반환
+        $viewFile = $this->getViewFile($this->paging);
+
         return view($viewFile,[
-            'products'=>$this->fetch($paging)
+            'products'=>$this->fetch($this->paging)
         ]);
     }
 
+    ## 데이터 읽기
     private function fetch($paging)
     {
         $db = DB::table('shop_goods');
 
+        // 카테고리 상품 검색
+        $db = $this->checkCategory($db);
+
         // 조건필터 추가
+        $db = $this->checkFilters($db);
+
+        // 옵션 필터링
+        $db = $this->checkOptions($db);
+
+
+
+
+        // 정렬방식 선택
+        $db = $this->checkSorting($db);
+
+        // found Items
+        $this->foundItems = $db->count();
+
+        return $db->paginate($paging);
+    }
+
+    private function checkCategory($db)
+    {
+        if($this->cate) {
+            $db->where('category', 'like', '%'.$this->cate.';%');
+        }
+        return $db;
+    }
+
+    ## uri에서 카테고리 검사
+    private function getCeteCode()
+    {
+        $current_url = Request::url();
+        $urls = array_reverse(explode('/',$current_url));
+
+        // 계시판 코드 추출
+        if(isset($urls[0]) && is_string($urls[0])) {
+            if($urls[0] != "goods") {
+                return $urls[0];
+            }
+        }
+
+        return false;
+    }
+
+    private function checkOptions($db)
+    {
+        if($this->options) {
+            foreach($this->options as $key => $option) {
+                foreach($option as $value) {
+                    if($value) {
+                        $db->orWhere('option', 'like', '%'.$value.';%');
+                    }
+                }
+            }
+        }
+
+        return $db;
+    }
+
+    private function checkSorting($db)
+    {
+        if($this->sorting) {
+            $sort = explode(':',$this->sorting);
+
+            if(isset($sort[0]) && $sort[0]) {
+                if(isset($sort[1]) && $sort[1]) {
+                    $db->orderBy($sort[0], $sort[1]);
+                }
+            }
+        }
+
+        return $db;
+    }
+
+    private function checkFilters($db)
+    {
         if($this->filters) {
             foreach($this->filters as $key => $filter) {
-                // _시작하는 키의 경우 range 처리
-                if($key[0] == '_') {
-                    $field = trim($key,'_');
-                    //dd($field);
+                // > 또는 < 시작하는 키의 경우 range 처리
+                if(in_array($key[0], ['<','>'])) {
+
+                    // 인식키 제거
+                    $field = trim($key,'<');
+                    $field = trim($key,'>');
+
                     if(isset($filter['range1']) && $filter['range1']) {
                         $db->where($field ,'>=', $filter['range1']);
                     }
@@ -79,75 +187,36 @@ class ShopGoodsList extends Component
                         $db->where($field ,'<=', $filter['range2']);
                     }
 
-                } else if($key[0] == '*') {
-                    // or like
-                    $field = trim($key,'*');
+                }
+                // %로 시작하는 경우 like로 처리
+                else if($key[0] == '%') {
+                    $field = trim($key,'%');
                     foreach($filter as $value) {
                         if($value) {
                             $db->orWhere($field, 'like', '%'.$value.';%');
                         }
                     }
                 }
+                // or 일치조건
+                else if($key[0] == '!') {
+                    $field = trim($key,'!');
+                    foreach($filter as $value) {
+                        if($value) {
+                            $db->orWhere($field, $value);
+                        }
+                    }
+                }
+                // 일반 컬럼명 일경우 == 일치 조건
                 else {
                     // $filer가 빈 배열이 아는 경우에만 처리
                     if($filter) {
                         $db->whereIn($key, $filter);
                     }
                 }
-
-
-                // foreach($filter as $value) {
-                //     $db->whereOr($key,'like','%'.$value.'%');
-                // }
             }
         }
 
-        // 옵션 필터링
-        if($this->options) {
-            //dump($this->options);
-            foreach($this->options as $key => $option) {
-                foreach($option as $value) {
-                    if($value) {
-                        //dump($value);
-                        $db->orWhere('option', 'like', '%'.$value.';%');
-                    }
-                }
-            }
-        }
-
-        /*
-        $category_id = $this->category_id;
-        // 카테고리 상품 검색
-        if($category_id) {
-            $rows = $this->getCategory($category_id);
-            $ids = [];
-            foreach($rows as $row) {
-                $ids []= $row->product_id;
-            }
-
-            $db = DB::table('shop_goods')->whereIn('id',$ids);
-
-        } else {
-            // 전체상품
-
-        }
-            */
-
-        // 정렬방식 선택
-        if($this->sorting == "date") {
-            $db->orderBy('created_at',"DESC");
-        } else
-        if($this->sorting == "price") {
-            $db->orderBy('regular_price',"ASC");
-        } else
-        if($this->sorting == "price-desc") {
-            $db->orderBy('regular_price',"DESC");
-        }
-
-        // found Items
-        $this->foundItems = $db->count();
-
-        return $db->paginate($paging);
+        return $db;
     }
 
     private function getCategory($category_id)
@@ -187,11 +256,12 @@ class ShopGoodsList extends Component
 
 
     /**
-     * 관심상품 등록
+     * 상품 overlay 버튼 처리
      */
+    ## 관심상품 등록
     public function addWish($id)
     {
-        //dd($id);
+        // 관심 상품은 회원 로그인한 경우에만 처리
         if(Auth::check()) {
             $email = Auth::user()->email;
 
@@ -220,20 +290,19 @@ class ShopGoodsList extends Component
         }
     }
 
-
-    /**
-     * 장바구니
-     */
-    public $popupCart = false;
-
+    ## 장바구니
+    //public $popupCart = false;
     public function addCart($product_id, $product_name, $product_price)
     {
+
         if($this->cartidx) {
 
             // cart목록에 상품이 존재하는지 확인
             $cart = DB::table('shop_cart')
                 ->where('cartidx',$this->cartidx)
-                ->where('product_id',$product_id)->first();
+                ->where('product_id',$product_id)
+                ->first();
+
 
             if($cart) {
                 // 장바구니 존재 : 상품 갯수를 1개 증가
@@ -246,13 +315,15 @@ class ShopGoodsList extends Component
                 session()->increment('cart');
 
                 // 신규상품 등록
-                $product = DB::table('shop_products')->where('id',$product_id)->first();
+                $product = DB::table('shop_goods')
+                    ->where('id',$product_id)
+                    ->first();
                 $data = [
                     'cartidx'=>$this->cartidx,
                     'product_id'=>$product->id,
                     'product'=>$product->name,
                     'image'=>$product->image,
-                    'price'=>$product->sale_price
+                    'price'=>$product->price
                 ];
 
                 if(Auth::check()) {
@@ -264,21 +335,46 @@ class ShopGoodsList extends Component
             }
         }
 
-        $this->popupCartOpen();
+        // $this->popupCartOpen();
     }
 
-    public function popupCartOpen()
+    private function checkUserCartIdx()
     {
-        $this->popupCart = true;
+        // 회원 인증여부 체크
+        if($user = Auth::user()) {
+            // 이전에 장바구니가 있는 경우 확인
+            $check = DB::table('shop_cart')
+                ->where('email',$user->email)
+                ->orderBy('id',"desc") // 가장 최신
+                ->first();
+
+            if($check) {
+                // 카트번호 저장
+                return $check->cartidx;
+            }
+        }
     }
 
-    public function popupCartClose()
+    private function generateUniqueCartId()
     {
-        $this->popupCart = false;
+        // 고유의 ID를 생성
+        $id = uniqid(mt_rand(), true);
+        $code = substr(hash('sha256',$id),0,15); // 10자리 추출
+        return date("Ymd-his")."-".$code;
     }
+
+    // public function popupCartOpen()
+    // {
+    //     $this->popupCart = true;
+    // }
+
+    // public function popupCartClose()
+    // {
+    //     $this->popupCart = false;
+    // }
 
     /**
-     * 이벤트
+     * 검색 필터와 통신을 위한 이벤트
      */
     protected $listeners = [
         'setFilter', 'setOptions'
