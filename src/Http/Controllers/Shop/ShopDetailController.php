@@ -28,7 +28,7 @@ class ShopDetailController extends SiteController
         $actions['subtitle'] = "상품 상세 정보입니다.";
 
         // 레이아웃을 커스텀 변경합니다.
-        $actions['view']['layout'] = "goods_detail";
+        $actions['view']['layout'] = "detail";
 
         $this->setReflectActions($actions);
     }
