@@ -48,7 +48,7 @@
     </div>
     <select class="form-select form-select-lg" wire:model="optForms.{{$type}}">
         @foreach($option as $item)
-            @if($item['var'])
+            @if(isset($item['var']) && $item['var'])
             <option value="{{$item['var']}}">{{$item['name']}}</option>
             @else
             <option value="{{$item['name']}}">{{$item['name']}}</option>

@@ -175,33 +175,37 @@ class ShopDetailOption extends Component
 
             // 옵션 이미지 처리
             $this->optionImage=null;
+            if(isset($this->optionItem['image'])) {
 
-            $source = storage_path('app');
-            $source .= DIRECTORY_SEPARATOR;
-            $source .= $this->optionItem['image']->store('uploads/goods/option');
 
-            $extension = strtolower(substr(strrchr($source,"."),1));
+                $source = storage_path('app');
+                $source .= DIRECTORY_SEPARATOR;
+                $source .= $this->optionItem['image']->store('uploads/goods/option');
 
-            $target = public_path();
-            $subPath = "/images/goods";
-            $subPath .= "/".date("Y/m/d"); // 날짜 경로를 추가함
-            $subPath = str_replace(["/","\\"],DIRECTORY_SEPARATOR,$subPath);
-            //dump($target);
-            if(!is_dir($target.$subPath)) {
-                mkdir($target.$subPath, 755, true);
+                $extension = strtolower(substr(strrchr($source,"."),1));
+
+                $target = public_path();
+                $subPath = "/images/goods";
+                $subPath .= "/".date("Y/m/d"); // 날짜 경로를 추가함
+                $subPath = str_replace(["/","\\"],DIRECTORY_SEPARATOR,$subPath);
+                //dump($target);
+                if(!is_dir($target.$subPath)) {
+                    mkdir($target.$subPath, 755, true);
+                }
+
+                // 이미지 파일 /public/~ 으로 이동
+                $filename = $this->forms['id']."-".
+                    $key."-".
+                    $this->optionItem['name'].
+                    ".".$extension;
+
+                rename($source,
+                    $target.$subPath.DIRECTORY_SEPARATOR.$filename
+                );
+
+                $this->optionImage = $subPath.DIRECTORY_SEPARATOR.$filename;
             }
 
-            // 이미지 파일 /public/~ 으로 이동
-            $filename = $this->forms['id']."-".
-                $key."-".
-                $this->optionItem['name'].
-                ".".$extension;
-
-            rename($source,
-                $target.$subPath.DIRECTORY_SEPARATOR.$filename
-            );
-
-            $this->optionImage = $subPath.DIRECTORY_SEPARATOR.$filename;
 
             DB::table('shop_goods_option')->insert([
                 'goods_id' => $this->forms['id'],

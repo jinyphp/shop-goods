@@ -42,6 +42,7 @@
                         wire:click="optionItemStore('{{$key}}')">Add</button>
                     </div>
                     <div class="col-12">
+
                         <button type="submit" class="btn btn-secondary"
                             wire:click="optionItemCancel()">cancel</button>
                     </div>
