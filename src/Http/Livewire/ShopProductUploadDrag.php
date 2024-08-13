@@ -1,5 +1,4 @@
 <?php
-
 namespace Jiny\Shop\Goods\Http\Livewire;
 
 use Illuminate\Support\Facades\Blade;
@@ -18,7 +17,7 @@ use Livewire\Attributes\On;
 
 class ShopProductUploadDrag extends Component
 {
-    public $path = "/images/products";
+    public $path = "/images/goods";
     public $category;
 
     public function render()

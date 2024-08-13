@@ -6,7 +6,6 @@
                 <h2 class="fw-bolder">Brands</h2>
                 <p class="lead fw-normal text-muted mb-5">인기있는 브랜드 목록 입니다.</p>
             </div>
-
         </div>
     </section>
 

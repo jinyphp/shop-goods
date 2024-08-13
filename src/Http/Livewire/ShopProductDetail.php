@@ -1,19 +1,15 @@
 <?php
-
 namespace Jiny\Shop\Goods\Http\Livewire;
 
 use Illuminate\Support\Facades\Blade;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
-
 use Webuni\FrontMatter\FrontMatter;
 use Jiny\Pages\Http\Parsedown;
-
 use \Jiny\Html\CTag;
 use Jiny\Shop\Entities\ShopProducts;
 use Cart;
 use Illuminate\Support\Facades\Auth;
-
 use Livewire\WithFileUploads;
 use Livewire\Attributes\On;
 
@@ -24,6 +20,9 @@ class ShopProductDetail extends Component
 
     public $actions = [];
     public $widget=[]; // 위젯정보
+
+
+
 
     // public $product = []; //상품정보
     public $slug;

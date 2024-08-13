@@ -1,5 +1,5 @@
 <?php
-namespace Jiny\Shop\Http\Controllers\Admin;
+namespace Jiny\Shop\Goods\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\DB;
  */
 class ProductUploadController extends Controller
 {
+    public function index(Request $requet)
+    {
+        return "OK";
+    }
 
     public function dropzone(Request $requet)
     {
+
         $uploaded = [];
 
         // 업로드 경로 확인하기
@@ -59,8 +64,8 @@ class ProductUploadController extends Controller
                     $uploaded['image'] = $image;
 
                     // 상품목록 추가
-                    $id = DB::table('shop_products')->insertGetId([
-                        'image'=>$image,
+                    $id = DB::table('shop_goods')->insertGetId([
+                        'image'=>"/".$image,
                         'created_at' => $created_at,
                         'updated_at' => $created_at
                     ]);
