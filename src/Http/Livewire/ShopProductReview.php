@@ -25,9 +25,12 @@ class ShopProductReview extends Component
     // 상품 배열
     public $goods;
     public $ratio;
+    public $viewFile;
 
-    public function mount(Request $request) {
+    public function mount(Request $request, $viewFile) {
+
         // 변수 초기화
+        $this->viewFile = $viewFile;
         $this->slug = $request->slug;
         $this->ratings = array(6);
         for ($i = 0; $i < 5; $i++) {
@@ -71,9 +74,7 @@ class ShopProductReview extends Component
     public function render()
     {
 
-        $viewFile = 'jiny-shop-goods::shop-electronics.product_review';
-
-        return view($viewFile);
+        return view($this->viewFile);
     }
 
     // DB에 업데이트한 쿼리 조회
