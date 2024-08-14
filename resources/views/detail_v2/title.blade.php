@@ -4,7 +4,7 @@
         <div>
             <!-- Reviews -->
             <x-shop-review-star value="30" href="javascript:void(0);">
-                23 reviews
+                {{getProductStarInfo($slug)['totalReview']}} reviews
             </x-shop-review-star>
         </div>
     </x-flex-between>
