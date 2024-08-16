@@ -38,6 +38,36 @@
                 </x-form-item>
             </x-form-hor>
 
+            <x-form-hor>
+                <x-form-label>ref</x-form-label>
+                <x-form-item>
+                    {!! xInputText()
+                        ->setWire('model.defer',"forms.ref")
+                        ->setWidth("standard")
+                    !!}
+                </x-form-item>
+            </x-form-hor>
+
+            <x-form-hor>
+                <x-form-label>level</x-form-label>
+                <x-form-item>
+                    {!! xInputText()
+                        ->setWire('model.defer',"forms.level")
+                        ->setWidth("standard")
+                    !!}
+                </x-form-item>
+            </x-form-hor>
+
+            <x-form-hor>
+                <x-form-label>pos</x-form-label>
+                <x-form-item>
+                    {!! xInputText()
+                        ->setWire('model.defer',"forms.pos")
+                        ->setWidth("standard")
+                    !!}
+                </x-form-item>
+            </x-form-hor>
+
         </x-navtab-item>
 
     </x-navtab>
