@@ -49,7 +49,7 @@ class Slider extends Component
     }
 
     public function render() {
-        // dump($this->product);
+        // dd($this->product);
 
         return view($this->viewFile,[
             'product' => $this->product
@@ -63,7 +63,7 @@ class Slider extends Component
         $rows = DB::table('shop_goods')
         ->where('id',$this->slug)->first();
 
-        $product[] = $rows->image;
+        $product[] = (array)$rows;
 
         //상품에 대한 이미지 가져오기
         $rows = DB::table('shop_goods_images')

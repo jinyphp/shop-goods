@@ -10,12 +10,12 @@
             <i class="ci-heart animate-target"></i>
         </button>
         <a class="hover-effect-scale hover-effect-opacity position-relative d-flex rounded overflow-hidden mb-3 mb-sm-4 mb-md-3 mb-lg-4"
-            href={{$product[0]}} data-glightbox data-gallery="product-gallery">
+            href={{$product[0]['image']}} data-glightbox data-gallery="product-gallery">
             <i
                 class="ci-zoom-in hover-effect-target fs-3 text-white position-absolute top-50 start-50 translate-middle opacity-0 z-2"></i>
             <div class="ratio hover-effect-target bg-body-tertiary rounded"
                 style="--cz-aspect-ratio: calc(706 / 636 * 100%)">
-                <img src={{$product[0]}} alt="Image">
+                <img src={{$product[0]['image']}} alt="Image">
             </div>
         </a>
     </div>
