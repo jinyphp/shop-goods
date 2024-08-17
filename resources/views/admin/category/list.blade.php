@@ -1,6 +1,9 @@
 <x-wire-table>
     {{-- 테이블 제목 --}}
     <x-wire-thead>
+        <th width='200'>ref</th>
+        <th width='200'>level</th>
+        <th width='200'>pos</th>
         <th width='200'>카테고리</th>
         <th width='100'>상품수</th>
         <th>slug</th>
@@ -12,6 +15,15 @@
             @foreach ($rows as $item)
             {{-- 테이블 리스트 --}}
             <x-wire-tbody-item :selected="$selected" :item="$item">
+                <td>
+                    {{$item->ref}}
+                </td>
+                <td>
+                    {{$item->level}}
+                </td>
+                <td>
+                    {{$item->pos}}
+                </td>
                 <td width='200'>
                     <x-click wire:click="edit({{$item->id}})">
                         @if($item->enable)
@@ -42,4 +54,3 @@
         @endif
     </tbody>
 </x-wire-table>
-
