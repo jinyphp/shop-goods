@@ -82,7 +82,9 @@ class JinyShopGoodServiceProvider extends ServiceProvider
 
 
 
-
+            // Drag 상품올리기
+            Livewire::component('shop-product-slider-upload-drag',
+                \Jiny\Shop\Goods\Http\Livewire\ShopProductSliderUploadDrag::class);
 
             // Drag 상품올리기
             Livewire::component('shop-product-upload-drag',

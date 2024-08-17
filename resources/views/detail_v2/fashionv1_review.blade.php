@@ -41,6 +41,7 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-lg-9">
+                    <p class="mb-md-1" style="font-size: 24px;"><strong>{{$item['title']}}</strong></p>
                     <p class="mb-md-4">{{$item['comment']}}
                     </p>
                     <div class="d-sm-flex justify-content-between">
