@@ -20,6 +20,7 @@ class Slider extends Component
     public $slug;
     public $product;
     public $viewFile;
+    public $popupForm = false;
 
     public function mount($viewFile) {
 
@@ -42,13 +43,27 @@ class Slider extends Component
 
         // dd($this->slug);
 
+        $this->product = $this->fetchData();
+        // dd($this->product);
+
+    }
+
+    public function render() {
+        // dd($this->product);
+
+        return view($this->viewFile,[
+            'product' => $this->product
+        ]);
+    }
+
+    public function fetchData() {
         $product = array();
 
         //상품 메인이미지 가져오기
         $rows = DB::table('shop_goods')
         ->where('id',$this->slug)->first();
 
-        $product[] = $rows->image;
+        $product[] = (array)$rows;
 
         //상품에 대한 이미지 가져오기
         $rows = DB::table('shop_goods_images')
@@ -56,18 +71,25 @@ class Slider extends Component
 
         //배열로 변환
         foreach ($rows as $row) {
-            $product[] = $row->image;
+            $product[] = (array)$row;
         }
 
-        $this->product = $product;
-
+        return $product;
     }
 
-    public function render()
-    {
-        // dd($this->product);
-        return view($this->viewFile,[
-            'product' => $this->product
-        ]);
+    public function RemoveSliderImage($img) {
+        // dd($img);
+        DB::table('shop_goods_images')->where('id', $img)->delete();
+        $this->product = $this->fetchData();
     }
+
+    public function modify() {
+        $this->popupForm = true;
+    }
+
+    public function update() {
+        $this->popupForm = false;
+        $this->product = $this->fetchData();
+    }
+
 }
